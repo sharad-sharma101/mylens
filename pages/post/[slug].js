@@ -1,6 +1,12 @@
+import ReaderNav from "../../components/ReaderNav"
+import Recommendation from "../../components/Recommendation"
+
 const Post = () =>{
     return(
-        <h1>success</h1>
+        <div className='flex' >
+            <ReaderNav/>
+            <Recommendation/>
+        </div>
     )
 }
 export default Post
