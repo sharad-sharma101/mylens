@@ -1,7 +1,9 @@
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import PostCard from "../components/PostCard";
-
+import { MediumContext } from '../context/MediumContext'
+import { useContext } from "react";
+ 
 const styles = {
   wrapper: `mx-auto`,
   main: `flex justify-center`,
@@ -10,6 +12,8 @@ const styles = {
 }
 
 export default function Home() {
+  const {allPosts} = useContext(MediumContext)
+  console.log(allPosts , 'cola');
   return (
     <>
       <Header/>
@@ -17,10 +21,10 @@ export default function Home() {
       <div className={styles.main}>
           <div className={styles.container}>
             <div className={styles.postsList}>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
+            
+            {allPosts.map(post =>
+              <PostCard post = {post} key={post.id}  />
+            )}
             </div>
           </div>
         </div>

@@ -60,9 +60,12 @@ const Recommendation = () => {
         </div>
      </div>
     
+      {/*         fdgdfh    */ }
      <div className={styles.recommendationContainer} >
         <div className={styles.title} >More author</div>
         <div className={styles.articlesContainer} >
+
+
         <div className={styles.articleContentWrapper} >
           <div className={styles.articleContent} >
                 <div className={styles.recommendationAuthorContainer} >
@@ -78,9 +81,10 @@ const Recommendation = () => {
             src={JSLogo} height={100} width={100} />
            </div>
         </div>
+       {/* end -=-=--=-= */}
+
         </div>
      </div>
-
     </div>
   )
 }
