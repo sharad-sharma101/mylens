@@ -1,11 +1,9 @@
 import Image from 'next/image'
+import { useContext } from 'react'
+import { MediumContext } from '../context/MediumContext'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdMarkEmailUnread } from 'react-icons/md'
-import ReplitLogo from '../static/replit.png'
-import TutorialImg from '../static/tutorial.jpg'
-import CPLogo from '../static/cp.png'
-import Qazi from '../static/qazi.jpg' 
-import JSLogo from '../static/jsLogo.png'
+
 
 const styles = {
   wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem]`,
@@ -16,13 +14,14 @@ const styles = {
   authorProfileImageContainer: `h-[5rem] w-[5rem] rounded-full overflow-hidden`,
   authorName: `font-semibold mb-[.2rem] mt-[1rem]`,
   authorFollowing: `text-[#787878]`,
+  cat: `flex items-center justify-center text-sm bg-black text-white w-[5rem] `,
   authorActions: `flex gap-[.6rem] my-[1rem]`,
   actionButton: `bg-[#1A8917] text-white rounded-full px-[.6rem] py-[.4rem] text-sm`,
   recommendationContainer: ``,
   title: `my-[1rem]`,
   articlesContainer: ``,
-  articleContentWrapper: `flex items-center justify-between cursor-pointer my-[1rem]`,
-  articleContent: `flex-[4]`,
+  articleContentWrapper: `flex items-center justify-between cursor-pointer min-h-[6rem] border-2 my-2 border-black p-1 `,
+  articleContent: `flex-[3] my-2 `,
   recommendationAuthorContainer: `flex items-center gap-[.6rem]`,
   recommendationAuthorProfileImageContainer: `rounded-full overflow-hidden h-[1.4rem] w-[1.4rem]`,
   recommendationAuthorName: `text-sm`,
@@ -31,62 +30,75 @@ const styles = {
   recommendationThumbnail: `object-cover`,
 }
 
-const Recommendation = () => {
-  return(
-    <div className={styles.wrapper} >
+const Recommendations = ({ author }) => {
+  const { allPosts } = useContext(MediumContext)
+  // const recommendedPosts = []
+    const recommendedPosts = allPosts.filter(ele =>  ele.data.author === ( (author[0] === undefined) ? '' : author[0].id ))
     
-    <div className={styles.accentedButton} >Get Ultimate Access</div>
-     <div className={styles.searchBar} >
-        <AiOutlineSearch/>
-        <input
+    
+  return (
+    <div className={styles.wrapper}>
+      <>
+        <div className={styles.accentedButton}>Get unlimited access</div>
+        <div className={styles.searchBar}>
+          <AiOutlineSearch />
+          <input
             className={styles.searchInput}
             placeholder='Search'
             type='text'
-        />
-     </div>
-     <div className={styles.authorContainer}>
-        <div className={styles.authorProfileImageContainer} >
-        <Image
-            src={Qazi}
-            width={100}
-            height={100}
-        />
+          />
         </div>
-        <div className={styles.authorName} >Sharad sharma</div>
-        <div className={styles.authorFollowing} >525k follower</div>
-        <div className={styles.authorActions} >
-            <button className={styles.actionButton} >Follow</button>
-            <button className={styles.actionButton} ><MdMarkEmailUnread/></button>
-        </div>
-     </div>
-    
-      {/*         fdgdfh    */ }
-     <div className={styles.recommendationContainer} >
-        <div className={styles.title} >More author</div>
-        <div className={styles.articlesContainer} >
 
+        {author.length > 0 ? (
+          <div className={styles.authorContainer}>
+            <div className={styles.authorProfileImageContainer}>
+              <Image
+                src={`https://res.cloudinary.com/demo/image/fetch/${author[0].data.imageUrl}`}
+                alt='author'
+                width={100}
+                height={100}
+              />
+            </div>
+            <div className={styles.authorName}>{author[0].data.name}</div>
+            <div className={styles.authorFollowing}>
+              {author[0].data.followerCount} followers
+            </div>
+            <div className={styles.authorActions}>
+              <button className={styles.actionButton}>Follow</button>
+              <button className={styles.actionButton}>
+                <MdMarkEmailUnread />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
 
-        <div className={styles.articleContentWrapper} >
-          <div className={styles.articleContent} >
-                <div className={styles.recommendationAuthorContainer} >
-                        <div className={styles.recommendationAuthorProfileImageContainer} >
-                        <Image src={Qazi} height={100} width={100} /></div>
-                        <div className={styles.recommendationAuthorName} > Sharad sharma  </div>
-                </div> 
-                <div className={styles.recommendationTitle} >Drishyam is cross 200 cr mark even thaiugh it is ....</div>
-           </div> 
-           <div className={styles.recommendationThumbnailContainer} >
-           <Image
-            className={styles.recommendationThumbnail}
-            src={JSLogo} height={100} width={100} />
-           </div>
+        <div className={styles.recommendationContainer}>
+          <div className={styles.title}>More from {author[0] === undefined ? 'User123' : author[0].data.name}</div>
+          <div className={styles.articlesContainer}>
+            {recommendedPosts.map(post => (
+              <div key={post.id} className={styles.articleContentWrapper}>
+                <div className={styles.articleContent}>
+                  <div className={styles.recommendationTitle}>{post.data.title}</div>
+                  <div className={styles.cat}>{post.data.category}</div>
+                </div>
+                <div className={styles.recommendationThumbnailContainer}>
+                  <Image
+                    className={styles.recommendationThumbnail}
+                    src={`https://res.cloudinary.com/demo/image/fetch/${post.data.bannerImage}`}
+                    alt='thumbnail'
+                    height={100}
+                    width={100}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-       {/* end -=-=--=-= */}
-
-        </div>
-     </div>
+      </>
     </div>
   )
 }
 
-export default Recommendation
+export default Recommendations

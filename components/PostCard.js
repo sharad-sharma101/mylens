@@ -7,7 +7,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const styles = {
-    wrapper: `max-w-[46rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer`,
+    wrapper: `max-w-[36rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer border-l-2 border-black my-3 px-5`,
     postDetails: `flex-[2.5] flex flex-col`,
     authorContainer: `flex gap-[.4rem]`,
     authorName: `font-semibold`,

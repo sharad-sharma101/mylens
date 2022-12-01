@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Logo from './../static/banner.png'
 
 const styles = {
-    wrapper: `h-max-[10rem] flex items-center justify-center border-y p-5 border-black bg-[#FCC017]`,
+    wrapper: `h-max-[10rem] flex items-center justify-center border-y p-5 border-black bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ... `,
     content: `max-w-8xl flex-1 flex items-center justify-between`,
     accentedButton: `bg-black text-white py-2 px-4 rounded-full`,
   }

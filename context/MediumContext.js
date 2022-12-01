@@ -45,8 +45,7 @@ export const MediumProvider = ({ children }) => {
               postLength: doc.data().postLength,
               bannerImage: doc.data().bannerImage,
               title: doc.data().title,
-              comments: doc.data().comments,
-              postedOn: doc.data().postOn.toDate(),
+              postedOn: doc.data().postedOn.toDate(),
               author: doc.data().author,
             },
           }
@@ -69,7 +68,7 @@ export const MediumProvider = ({ children }) => {
   const handleUserAuth = async () => {
     signInWithPopup(auth, provider)
       .then(result => {
-        const user = result.user
+        const user = result.user 
 
         setUser(user)
         saveUser(user)
