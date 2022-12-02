@@ -6,6 +6,7 @@ import { MediumContext } from '../context/MediumContext'
 import UploadModal from './UploadModal'
 import Logo from '../static/logo.png'
 import Modal from 'react-modal'
+import Member from './Member'
 
 Modal.setAppElement('#__next')
 
@@ -32,6 +33,8 @@ const styles = {
   logo: `cursor-pointer object-contain`,
   bannerNav: `flex cursor-pointer items-center space-x-5`,
   accentedButton: `bg-black text-white py-2 px-4 rounded-full`,
+  profileImageContainer: `w-[2.4rem] h-[2.4rem] rounded-full overflow-hidden grid place-items-center `,
+  image: `object-cover`,
 }
 
 const Header = () => {
@@ -52,11 +55,15 @@ const Header = () => {
           />
         </div>
         <div className={styles.bannerNav}>
-          <div>Our Story</div>
-          <div>Membership</div>
+          
           {/* USER */}
           {user ? (
             <>
+            <div className={styles.profileImageContainer} >
+              <img src={user.photoURL} alt="image" className={styles.image}  />
+              </div>
+              <Link href={'/?member=1'} >
+              <div>Membership</div></Link>
               <Link href={'/?addNew=1'}>
                 <div className={styles.accentedButton}>Write</div>
               </Link>
@@ -66,6 +73,8 @@ const Header = () => {
             </>
           ) : (
             <>
+              <div onClick={handleUserAuth} >Our Story</div>
+              <div onClick={handleUserAuth} >Membership</div>
               <div onClick={handleUserAuth}>Sign In</div>
               <div onClick={handleUserAuth} className={styles.accentedButton}>
                 <div>Get Started</div>
@@ -73,7 +82,13 @@ const Header = () => {
             </>
           )}
         </div>
-      </div>
+      </div>{
+       <Modal 
+        isOpen={!!router.query.member}
+        onRequestClose={() => router.push('/')}
+        style={customStyles} >
+        <Member/>
+      </Modal>}
       <Modal
         isOpen={!!router.query.addNew}
         onRequestClose={() => router.push('/')}

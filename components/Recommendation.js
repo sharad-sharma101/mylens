@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { MediumContext } from '../context/MediumContext'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdMarkEmailUnread } from 'react-icons/md'
+import Link from 'next/link'
 
 
 const styles = {
@@ -78,6 +79,7 @@ const Recommendations = ({ author }) => {
           <div className={styles.title}>More from {author[0] === undefined ? 'User123' : author[0].data.name}</div>
           <div className={styles.articlesContainer}>
             {recommendedPosts.map(post => (
+            <Link href={`/post/${post.id}`}>
               <div key={post.id} className={styles.articleContentWrapper}>
                 <div className={styles.articleContent}>
                   <div className={styles.recommendationTitle}>{post.data.title}</div>
@@ -93,6 +95,7 @@ const Recommendations = ({ author }) => {
                   />
                 </div>
               </div>
+            </Link>
             ))}
           </div>
         </div>

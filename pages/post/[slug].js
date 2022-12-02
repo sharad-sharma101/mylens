@@ -25,7 +25,7 @@ const Post = () =>{
   }, [allUsers, post, allUsers.length])
   console.log(author);
     return(
-        <div className='flex bg-[#f0ddec]' >
+        <div className='flex bg-[#fadef6]' >
             <ReaderNav/>
             <ArticleMain post={post} author={author}/>
             <Recommendation author={author}/>

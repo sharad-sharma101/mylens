@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Logo from '../static/logo.png'
 import { FiBookmark } from 'react-icons/fi'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -7,7 +6,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 
 const styles = {
-    wrapper: `max-w-[36rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer border-l-2 border-black my-3 px-5`,
+    wrapper: `max-w-[76rem] h-[10rem] flex items-center gap-[1rem] cursor-pointer border-b-2 border-black my-3 px-5`,
     postDetails: `flex-[2.5] flex flex-col`,
     authorContainer: `flex gap-[.4rem]`,
     authorName: `font-semibold`,
@@ -19,7 +18,7 @@ const styles = {
     articleDetails: `my-2 text-[.8rem]`,
     bookmarkContainer: `cursor-pointer`,
     category: `bg-[#F2F3F2] p-1 rounded-full`,
-    thumbnailContainer: `flex-1`,
+    thumbnailContainer: `flex-1 `,
   }
 
 const PostCard = ({post}) => {
@@ -74,8 +73,8 @@ const PostCard = ({post}) => {
         <Image
           src={`https://res.cloudinary.com/demo/image/fetch/${post.data.bannerImage}`}
           alt='thumbnail'
-          height={100}
-          width={100}
+          height={150}
+          width={250}
         />
       </div>
     </div>

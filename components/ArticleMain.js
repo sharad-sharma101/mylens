@@ -6,12 +6,9 @@ import { GrLinkedin } from 'react-icons/gr'
 import { HiOutlineLink } from 'react-icons/hi'
 import { BiBookmarks } from 'react-icons/bi'
 import { FiMoreHorizontal } from 'react-icons/fi'
-import Banner from './../static/banner.png'
-import Author from '../static/author.jpg'
-import Thumbnail from '../static/thumbnail.webp'
 
 const styles = {
-  wrapper: `flex items-center justify-center flex-[4] border-l border-r `,
+  wrapper: `flex items-center justify-center flex-[4] border-l border-r bg-[#f7ebf6] `,
   content: `h-screen w-full  justify-center overflow-scroll p-[2rem]`,
   referencesContainer: `flex justify-between items-center mt-[2.2rem] mb-[1.2rem]`,
   postHeaderContainer: `flex`,

@@ -6,7 +6,8 @@ import { FiBell } from 'react-icons/fi'
 import { BiBookmarks } from 'react-icons/bi'
 import { RiArticleLine } from 'react-icons/ri'
 import { BsPencilSquare } from 'react-icons/bs'
-import Qazi from '../static/qazi.jpg'
+import { MediumContext } from '../context/MediumContext'
+import { useContext } from 'react'
 
 const styles = {
   wrapper: `w-[5rem] h-screen flex flex-col justify-between items-center p-[1rem]`,
@@ -18,6 +19,7 @@ const styles = {
 }
 
 const ReaderNav = () =>{
+  const { user } = useContext(MediumContext) 
     return(
     <div className={styles.wrapper} >
         <Link href='/' >
@@ -36,9 +38,10 @@ const ReaderNav = () =>{
         </div>
        
        <div className={styles.profileImageContainer} >
-        <Image
+        <img
             className={styles.profileImage}
-            src={Qazi}
+            src={user ? `${user.photoURL}` : ''}
+            alt="image"
         />
        </div>
     </div>
