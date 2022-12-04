@@ -8,12 +8,14 @@ import PostCard from '../components/PostCard'
 const styles = {
   wrapper: `mx-auto bg-[#faccea] `,
   main: `flex justify-center`,
-  container: `max-w-7xl flex-1`,
-  postsList: `flex flex-col gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3  `,
+  container: `max-w-7xl flex-1 sm:{w-[30rem]}`,
+  postsList: `flex flex-col gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3 sm:{w-[30rem]}  `,
 }
 
 export default function Home() {
   const { allPosts } = useContext(MediumContext)
+  
+  
 
   return (
     <div className={styles.wrapper}>
@@ -21,7 +23,7 @@ export default function Home() {
         <title>My Lens</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Header />
+      <Header id='navbar' />
       <main>
         <Banner />
         <div className={styles.main}>

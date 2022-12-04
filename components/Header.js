@@ -27,7 +27,7 @@ const customStyles = {
 }
 
 const styles = {
-  wrapper: `flex justify-center gap-10 p-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...`,
+  wrapper: `flex justify-center gap-10 p-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ... `,
   content: `w-full flex-1 flex justify-between gap-10`,
   logoContainer: `flex items-center flex-start`,
   logo: `cursor-pointer object-contain`,
@@ -42,8 +42,9 @@ const Header = () => {
   const router = useRouter()
   const { user, handleUserAuth } = useContext(MediumContext)
 
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} >
       <div className={styles.content}>
         <div className={styles.logoContainer}>
           <Image
