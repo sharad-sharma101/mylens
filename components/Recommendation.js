@@ -1,9 +1,12 @@
 import Image from 'next/image'
-import { useContext } from 'react'
+import { useContext , useState} from 'react'
 import { MediumContext } from '../context/MediumContext'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdMarkEmailUnread } from 'react-icons/md'
 import Link from 'next/link'
+import { collection, query, where, getDocs, updateDoc , doc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { async } from '@firebase/util'
 
 
 const styles = {
@@ -35,8 +38,38 @@ const Recommendations = ({ author }) => {
   const { allPosts } = useContext(MediumContext)
   // const recommendedPosts = []
     const recommendedPosts = allPosts.filter(ele =>  ele.data.author === ( (author[0] === undefined) ? '' : author[0].id ))
-    
-    
+    const { user } = useContext(MediumContext) 
+    const [flag, setflag] = useState(true)
+    const fans = async () => {
+          if(user){
+            if(flag){
+           let fc = author[0].data.followerCount;
+          const userRef = query(collection(db, "users"), where("email", "==", author[0].data.email));
+          const findUsers = await getDocs(userRef);
+          findUsers.forEach( async (user) => {
+           const getUser = doc(db, 'users', user.id);
+           await updateDoc(getUser, {
+            followerCount:  fc+1
+           });
+          });
+          setflag(false)}
+          else{
+            let fc = author[0].data.followerCount;
+          const userRef = query(collection(db, "users"), where("email", "==", author[0].data.email));
+          const findUsers = await getDocs(userRef);
+          findUsers.forEach( async (user) => {
+           const getUser = doc(db, 'users', user.id);
+           await updateDoc(getUser, {
+            followerCount:  fc-1
+           });
+          });
+          setflag(true)
+          }
+         } else{
+            alert("You have to sign in before follow anyone")
+          }
+    }
+
   return (
     <div className={styles.wrapper}>
       <>
@@ -62,10 +95,10 @@ const Recommendations = ({ author }) => {
             </div>
             <div className={styles.authorName}>{author[0].data.name}</div>
             <div className={styles.authorFollowing}>
-              {author[0].data.followerCount} followers
+              {flag ? author[0].data.followerCount : author[0].data.followerCount+1} followers
             </div>
             <div className={styles.authorActions}>
-              <button className={styles.actionButton}>Follow</button>
+              <button className={styles.actionButton} onClick={fans} >{ flag ? 'Follow' : 'unfolow'}</button>
               <button className={styles.actionButton}>
                 <MdMarkEmailUnread />
               </button>
