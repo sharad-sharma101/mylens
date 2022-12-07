@@ -10,7 +10,8 @@ import { async } from '@firebase/util'
 
 
 const styles = {
-  wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem]`,
+  wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem] overflow-scroll`,
+  cont: ``,
   accentedButton: `flex items-center justify-center text-sm bg-black text-white my-[2rem] py-[.6rem] rounded-full`,
   searchBar: `flex items-center gap-[.6rem] h-[2.6rem] border px-[1rem] rounded-full`,
   searchInput: `border-none outline-none bg-none w-full`,
@@ -18,7 +19,7 @@ const styles = {
   authorProfileImageContainer: `h-[5rem] w-[5rem] rounded-full overflow-hidden`,
   authorName: `font-semibold mb-[.2rem] mt-[1rem]`,
   authorFollowing: `text-[#787878]`,
-  cat: `flex items-center justify-center text-sm bg-black text-white w-[5rem] `,
+  cat: `flex items-center justify-center text-sm bg-black rounded-full text-white w-[5rem] mx-[0.6rem] my-[1rem] `,
   authorActions: `flex gap-[.6rem] my-[1rem]`,
   actionButton: `bg-[#1A8917] text-white rounded-full px-[.6rem] py-[.4rem] text-sm`,
   recommendationContainer: ``,
@@ -72,7 +73,7 @@ const Recommendations = ({ author }) => {
 
   return (
     <div className={styles.wrapper}>
-      <>
+      <div className={styles.cont}>
         <div className={styles.accentedButton}>Get unlimited access</div>
         <div className={styles.searchBar}>
           <AiOutlineSearch />
@@ -132,7 +133,7 @@ const Recommendations = ({ author }) => {
             ))}
           </div>
         </div>
-      </>
+      </div>
     </div>
   )
 }
