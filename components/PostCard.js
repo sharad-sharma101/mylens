@@ -53,7 +53,7 @@ const PostCard = ({post}) => {
           </div>
           <div className={styles.authorName}>{authorData?.name}</div>
         </div>
-        <h1 className={styles.title}>{post.data.title}</h1>
+        <h1 className={styles.title}>{post.data.title.substr(0,40)}...</h1>
         <div className={styles.briefing}>{post.data.brief}</div>
         <div className={styles.detailsContainer}>
           <span className={styles.articleDetails}>
