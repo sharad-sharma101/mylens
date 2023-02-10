@@ -6,14 +6,13 @@ import { MdMarkEmailUnread } from 'react-icons/md'
 import Link from 'next/link'
 import { collection, query, where, getDocs, updateDoc , doc } from 'firebase/firestore'
 import { db } from '../firebase'
-import { async } from '@firebase/util'
 
 
 const styles = {
   wrapper: `h-screen min-w-[10rem] max-w-[30rem] flex-[1.2] p-[2rem] overflow-scroll`,
   cont: ``,
   accentedButton: `flex items-center justify-center text-sm bg-black text-white my-[2rem] py-[.6rem] rounded-full`,
-  searchBar: `flex items-center gap-[.6rem] h-[2.6rem] border px-[1rem] rounded-full`,
+  searchBar: `flex items-center gap-[.6rem] h-[2.6rem] border px-[1rem] rounded-full bg-white`,
   searchInput: `border-none outline-none bg-none w-full`,
   authorContainer: `my-[2rem]`,
   authorProfileImageContainer: `h-[5rem] w-[5rem] rounded-full overflow-hidden`,
@@ -37,9 +36,10 @@ const styles = {
 
 const Recommendations = ({ author }) => {
   const { allPosts } = useContext(MediumContext)
+
   // const recommendedPosts = []
     const recommendedPosts = allPosts.filter(ele =>  ele.data.author === ( (author[0] === undefined) ? '' : author[0].id ))
-    const { user } = useContext(MediumContext) 
+    const { user , handleUserAuth } = useContext(MediumContext) 
     const [flag, setflag] = useState(true)
     const fans = async () => {
           if(user){
@@ -74,7 +74,7 @@ const Recommendations = ({ author }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.cont}>
-        <div className={styles.accentedButton}>Get unlimited access</div>
+        <div className={styles.accentedButton} onClick={handleUserAuth}>{ user ? "Get unlimited access" : "Login"}</div>
         <div className={styles.searchBar}>
           <AiOutlineSearch />
           <input

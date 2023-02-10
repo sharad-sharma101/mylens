@@ -6,7 +6,8 @@ import { GrLinkedin } from 'react-icons/gr'
 import { HiOutlineLink } from 'react-icons/hi'
 import { BiBookmarks } from 'react-icons/bi'
 import { FiMoreHorizontal } from 'react-icons/fi'
-
+import { useState , useEffect , useContext } from 'react'
+import  CommentsSection from './CommentsSection'
 const styles = {
   wrapper: `flex items-center justify-center flex-[4] border-l border-r bg-[#f7ebf6] `,
   content: `h-screen w-full  justify-center overflow-scroll p-[2rem]`,
@@ -27,7 +28,10 @@ const styles = {
   articleText: `font-mediumSerif text-[1.4rem] text-[#292929]`,
 }
 
-const ArticleMain = ({ post, author }) =>{
+
+const ArticleMain = ({ post, author  }) =>{
+  
+   const [Like, setLike] = useState(false)
   return(
     <div className={styles.wrapper}>
     <div className={styles.content}>
@@ -82,7 +86,18 @@ const ArticleMain = ({ post, author }) =>{
                 width={100}
               />
             </div>
+            <div className='flex justify-between' >
             <h1 className={styles.title}>{post[0].data?.title}</h1>
+            <a href="#_" className="relative px-5 py-3 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-black rounded-lg shadow-inner group">
+              <span className="absolute top-0 left-0 w-0 h-0 transition-all duration-200 border-t-2 border-gray-600 group-hover:w-full ease"></span>
+              <span className="absolute bottom-0 right-0 w-0 h-0 transition-all duration-200 border-b-2 border-gray-600 group-hover:w-full ease"></span>
+              <span className="absolute top-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-gray-600 group-hover:h-full ease"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-gray-600 group-hover:h-full ease"></span>
+              <span className="absolute inset-0 w-full h-full duration-300 delay-300 bg-gray-900 opacity-0 group-hover:opacity-100"></span>
+              <span className="relative transition-colors duration-300 delay-200 group-hover:text-white ease " onClick={()=>{setLike(!Like)}} 
+              >{ Like ? 'UNLIKE' : "LIKE" }</span>
+            </a>
+            </div>
             <h4 className={styles.subtitle}>
               <div>
                 {author[0].data?.name},{' '}
@@ -100,6 +115,9 @@ const ArticleMain = ({ post, author }) =>{
       ) : (
         <div>Loading...</div>
       )}
+
+      <CommentsSection post={post} />
+
     </div>
   </div>
   )
