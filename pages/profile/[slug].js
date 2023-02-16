@@ -6,7 +6,7 @@ import PostProfile from "../../components/PostProfile"
 import { useRouter } from "next/router"
 const styles = {
   wrapper: `mx-auto bg-[#faccea] `,
-  main: `flex justify-center`,
+  main: `flex justify-center bg-[#fadef6]  `,
   container: `max-w-7xl flex-1 sm:{w-[30rem]}`,
   postsList: `flex flex-col gap-1 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3 sm:{w-[30rem]}  `,
 }
@@ -23,6 +23,7 @@ const profile = () => {
       <Header/>
       {/* <ProfileNav user={user} /> */}
         <div className={styles.main}>
+        <br /><br />
         <h1 className="font-bold text-2xl">Blog written by you:</h1>
         <br /> <br />
           <div className={styles.container}>
@@ -32,7 +33,6 @@ const profile = () => {
                 ?
                 <>
                 <PostProfile  post={post} key={post.id} />
-                <button className="btn" onClick={console.log(post.data.title + "this is right")} >click</button>
                 </>
                 :
                 <div></div>

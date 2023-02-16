@@ -24,7 +24,7 @@ const styles = {
   recommendationContainer: ``,
   title: `my-[1rem]`,
   articlesContainer: ``,
-  articleContentWrapper: `flex items-center justify-between cursor-pointer min-h-[6rem] border-2 my-2 border-black p-1 `,
+  articleContentWrapper: `flex items-center justify-between cursor-pointer min-h-[6rem] shadow-lg my-2  p-1 hover:scale-110 `,
   articleContent: `flex-[3] my-2 `,
   recommendationAuthorContainer: `flex items-center gap-[.6rem]`,
   recommendationAuthorProfileImageContainer: `rounded-full overflow-hidden h-[1.4rem] w-[1.4rem]`,

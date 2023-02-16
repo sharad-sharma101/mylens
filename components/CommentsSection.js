@@ -16,20 +16,21 @@ const CommentsSection = ({post}) =>{
             }
           })
           const commentData = await res.json();
+          setComments([])
           if(commentData){
           const allComment = Object.values(commentData)
-          console.log(allComment);
+          let arr = []
            allComment.map(ele => {
             if (ele.post === (post[0] === undefined ? '' : post[0].id) ) {
-              console.log(ele.post === (post[0] === undefined ? '' : post[0].id));
-              setComments([ ele , ...Comments])
+              // setComments([ ele , ...Comments])
+              arr.push(ele);
             }
           })
-          console.log(Comments);
+          setComments(arr)
         }
       }
       getComment();
-    }, [])
+    }, [post])
     
     async function handlecomment() {
   
